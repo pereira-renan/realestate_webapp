@@ -4,6 +4,9 @@ import NProgress from "nprogress"
 import { ChakraProvider } from "@chakra-ui/react"
 
 import Layout from "../components/Layout"
+import customTheme from "../theme/styles"
+
+import "../styles/globals.css"
 
 function MyApp({ Component, pageProps }) {
   NProgress.configure({ showSpinner: false })
@@ -27,7 +30,7 @@ function MyApp({ Component, pageProps }) {
           referrerPolicy="no-referrer"
         />
       </Head>
-      <ChakraProvider>
+      <ChakraProvider theme={customTheme}>
         <Layout>
           <Component {...pageProps} />
         </Layout>

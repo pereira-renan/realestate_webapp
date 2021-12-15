@@ -1,51 +1,43 @@
 import Link from "next/link"
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  IconButton,
-  Flex,
-  Box,
-  Spacer,
-} from "@chakra-ui/react"
-import { FcMenu, FcHome, FcAbout } from "react-icons/fc"
-import { BsSearch } from "react-icons/bs"
-import { FiKey } from "react-icons/fi"
+import { Box, Spacer, Center, IconButton, useColorMode } from "@chakra-ui/react"
+import { GrUpdate } from "react-icons/gr"
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs"
 
-const Navbar = () => (
-  <Flex p="2" borderBottom="1px" borderColor="gray.100">
-    <Box fontSize="3xl" color="blue.400" fontWeight="bold">
-      <Link href="/" paddingLeft="2">
-        Realtor
-      </Link>
-    </Box>
-    <Spacer />
-    <Box>
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          icon={<FcMenu />}
-          variant="outlined"
-          color="red.400"
-        />
-        <MenuList>
-          <Link href="/" passHref>
-            <MenuItem icon={<FcHome />}>Home</MenuItem>
-          </Link>
-          <Link href="/search" passHref>
-            <MenuItem icon={<BsSearch />}>Search</MenuItem>
-          </Link>
-          <Link href="/search?purpose=for-sale" passHref>
-            <MenuItem icon={<FcAbout />}>Buy Property</MenuItem>
-          </Link>
-          <Link href="/search?purpose=for-rent" passHref>
-            <MenuItem icon={<FiKey />}>Rent Property</MenuItem>
-          </Link>
-        </MenuList>
-      </Menu>
-    </Box>
-  </Flex>
-)
+const Navbar = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
+  return (
+    <Center
+      px="15vw"
+      borderBottom="1px"
+      borderColor="gray.500"
+      backgroundColor="#162056"
+      height="60px"
+    >
+      <IconButton
+        icon={<GrUpdate />}
+        bg="#fc8181"
+        aria-label="Color mode switcher"
+        onClick={toggleColorMode}
+      >
+        Switch Mode
+      </IconButton>
+      <Spacer />
+      <Box fontSize="3xl" color="gray.100" fontWeight="bold" opacity="87%">
+        <Link href="/">
+          <a>{process.env.title}</a>
+        </Link>
+      </Box>
+      <Spacer />
+      <IconButton
+        icon={colorMode === "light" ? <BsFillSunFill /> : <BsFillMoonFill />}
+        bg="#fc8181"
+        aria-label="Color mode switcher"
+        onClick={toggleColorMode}
+      >
+        Switch Mode
+      </IconButton>
+    </Center>
+  )
+}
 
 export default Navbar
